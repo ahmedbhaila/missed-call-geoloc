@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">EnhancedCallNotifier</string>
+    <string name="title_activity_missed_call">MissedCallActivity</string>
+
+    <string name="message">Listening for missed calls...</string>
+    <string name="action_settings">Settings</string>
+</resources>
