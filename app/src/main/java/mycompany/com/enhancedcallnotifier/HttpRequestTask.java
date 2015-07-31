@@ -22,6 +22,7 @@ public class HttpRequestTask extends AsyncTask<String, String, String> {
     protected Context context;
     protected String missedCallNumber;
     protected String clientId;
+    private static final String appURL = "https://enigmatic-taiga-3619.herokuapp.com";
 
     public HttpRequestTask(Context context) {
         this.context = context;
@@ -29,13 +30,13 @@ public class HttpRequestTask extends AsyncTask<String, String, String> {
     @Override
     protected String doInBackground(String... params) {
         try {
-            final String url = "https://enigmatic-taiga-3619.herokuapp.com/locate/{client_id}/{number}/lookup";
+            final String lookupURL = appURL + "/locate/{client_id}/{number}/lookup";
             RestTemplate restTemplate = new RestTemplate();
             restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
             HashMap<String, String> param = new HashMap<>();
             param.put("client_id", params[0]);
             param.put("number", params[1]);
-            String status = restTemplate.getForObject(url, String.class, param);
+            String status = restTemplate.getForObject(lookupURL, String.class, param);
             missedCallNumber = params[1];
             clientId = params[0];
             return status;
@@ -55,9 +56,9 @@ public class HttpRequestTask extends AsyncTask<String, String, String> {
                             .setContentTitle("Enhanced Call Information Available")
                             .setContentText("Enhanced Call Information available for this missed called: " + missedCallNumber);
 
-            String url = "https://enigmatic-taiga-3619.herokuapp.com/map/" + clientId;
+            String geoMapURL = appURL + "/map/" + clientId;
             Intent resultIntent = new Intent(Intent.ACTION_VIEW);
-            resultIntent.setData(Uri.parse(url));
+            resultIntent.setData(Uri.parse(geoMapURL));
 
             PendingIntent resultPendingIntent =
                     PendingIntent.getActivity(
