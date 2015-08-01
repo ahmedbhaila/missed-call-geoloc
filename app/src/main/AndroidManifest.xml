@@ -24,10 +24,7 @@
             <!--<intent-filter>
                 <action android:name="android.intent.action.PHONE_STATE" />
             </intent-filter> -->
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </receiver>
 
         <service
@@ -36,10 +33,19 @@
             android:exported="true" >
         </service>
 
+
         <activity
             android:name=".MissedCallActivity"
             android:label="@string/title_activity_missed_call"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <category android:name="android.intent.category.BROWSABLE"></category>
+                <data android:scheme="com.android.ApplicationName"></data>
+            </intent-filter>
         </activity>
     </application>
 
